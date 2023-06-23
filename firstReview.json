@@ -1,1 +1,16 @@
-[{"review":"Wonderful","rating":"9.0"},{"review":"Unglaubliches Preis-Leistungs-Verhältnis","rating":"10"},{"review":"Tout était parfait, vacances adélique","rating":"10"},{"review":"Good","rating":"7.0"},{"review":"Very Good","rating":"8.0"},{"review":"Exceptional","rating":"10"},{"review":"Exceptional","rating":"10"},{"review":"Exceptional","rating":"10"},{"review":"PERFECTA","rating":"10"},{"review":"Exceptional","rating":"10"},{"review":"Very Good","rating":"8.0"}]
+[
+  {
+    "name": "9Round Fitness Franchise",
+    "sector": "30 Minute Kickbox Fitness",
+    "profilePhoto": "https://d2j6dbq0eux0bg.cloudfront.net/images/23931027/1303670814.jpg",
+    "is_active": "true",
+    "slug": "9round-fitness-franchise"
+  },
+  {
+    "name": "ActionCOACH",
+    "sector": "Business Strategy/Coaching",
+    "profilePhoto": "https://d2j6dbq0eux0bg.cloudfront.net/images/23931027/3381326066.jpg",
+    "is_active": "true",
+    "slug": "actioncoach"
+  }
+]

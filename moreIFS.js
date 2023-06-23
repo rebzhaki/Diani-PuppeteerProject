@@ -8,9 +8,7 @@ import fs from "fs";
   // Configure the navigation timeout
   await page.setDefaultNavigationTimeout(0);
 
-  await page.goto(
-    "https://worldfranchisecentre.com/B2B-&-B2C-Services-Franchises-c45438780"
-  );
+  await page.goto("https://worldfranchisecentre.com");
 
   await page.setViewport({ width: 1080, height: 1024 });
 
@@ -21,7 +19,29 @@ import fs from "fs";
 
   //   await page.waitForSelector("div.grid-category__card");
 
-  let selections = await page.$$eval(
+  let main = await page.$$eval(".grid-category__image", (elements) => {
+    const maxLinks2 = 7;
+    const hrefs = [];
+
+    for (let i = 0; i < elements.length; i++) {
+      const href = elements[i].href;
+      hrefs.push(href);
+
+      if (hrefs.length >= maxLinks2) {
+        break;
+      }
+    }
+
+    return hrefs;
+  });
+  console.log("main", main);
+
+  console.log("items", main[0]);
+  const newPage2 = await browser.newPage();
+  await newPage2.setDefaultNavigationTimeout(0);
+  await newPage2.goto(main[0]);
+
+  let selections = await newPage2.$$eval(
     ".grid-category__card a:nth-child(1)",
     (elements) =>
       elements
@@ -41,19 +61,14 @@ import fs from "fs";
     await newPage.setDefaultNavigationTimeout(0);
     await newPage.goto(selection);
 
-    let selectiveLinks = await page.$$eval(
+    let selectiveLinks = await newPage.$$eval(
       "div.grid-product__wrap-inner",
       (elements) => {
-        const maxLinks = 24; // Maximum number of links to retrieve
         const hrefs = [];
 
         for (let i = 0; i < elements.length; i++) {
           const href = elements[i].querySelector(".grid-product__image").href;
           hrefs.push(href);
-
-          if (hrefs.length >= maxLinks) {
-            break;
-          }
         }
 
         return hrefs;
@@ -65,9 +80,9 @@ import fs from "fs";
 
     num++;
     console.log("index", num);
-    if (num === 2) {
-      break;
-    }
+    // if (num === 2) {
+    //   break;
+    // }
 
     // console.log("==>", allReviews);
     for (const totalReviewPage of reviewPages) {
@@ -121,7 +136,7 @@ import fs from "fs";
       });
 
       fs.writeFile(
-        "B2B-&-B2C-Service.json",
+        "Food-Hospitality.json",
         JSON.stringify(allReviews),
         (err) => {
           if (err) throw err;
@@ -133,5 +148,6 @@ import fs from "fs";
     await newPage.screenshot({ path: "link.png", fullPage: true });
     await newPage.close();
   }
+  await newPage2.close();
   await browser.close();
 })();

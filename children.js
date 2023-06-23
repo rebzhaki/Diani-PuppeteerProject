@@ -9,7 +9,7 @@ import fs from "fs";
   await page.setDefaultNavigationTimeout(0);
 
   await page.goto(
-    "https://worldfranchisecentre.com/B2B-&-B2C-Services-Franchises-c45438780"
+    "https://worldfranchisecentre.com/Childrens-Franchises-c50185678"
   );
 
   await page.setViewport({ width: 1080, height: 1024 });
@@ -44,7 +44,7 @@ import fs from "fs";
     let selectiveLinks = await page.$$eval(
       "div.grid-product__wrap-inner",
       (elements) => {
-        const maxLinks = 24; // Maximum number of links to retrieve
+        const maxLinks = 6; // Maximum number of links to retrieve
         const hrefs = [];
 
         for (let i = 0; i < elements.length; i++) {
@@ -120,14 +120,10 @@ import fs from "fs";
         terms: "Test terms",
       });
 
-      fs.writeFile(
-        "B2B-&-B2C-Service.json",
-        JSON.stringify(allReviews),
-        (err) => {
-          if (err) throw err;
-          console.log("File Saved");
-        }
-      );
+      fs.writeFile("Children.json", JSON.stringify(allReviews), (err) => {
+        if (err) throw err;
+        console.log("File Saved");
+      });
     }
 
     await newPage.screenshot({ path: "link.png", fullPage: true });

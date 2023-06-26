@@ -121,7 +121,7 @@ import fs from "fs";
       });
 
       fs.writeFile(
-        "B2B-&-B2C-Service.json",
+        "B2B-&-B2C-Service-images.json",
         JSON.stringify(allReviews),
         (err) => {
           if (err) throw err;
